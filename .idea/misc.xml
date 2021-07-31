@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android App/MVVMImageSearch/app/src/main/res/drawable/gradient.xml" value="0.384375" />
         <entry key="..\:/Android App/MVVMImageSearch/app/src/main/res/drawable/ic_error.xml" value="0.384375" />
         <entry key="..\:/Android App/MVVMImageSearch/app/src/main/res/drawable/ic_search.xml" value="0.384375" />
         <entry key="..\:/Android App/MVVMImageSearch/app/src/main/res/drawable/ic_user.xml" value="0.384375" />
         <entry key="..\:/Android App/MVVMImageSearch/app/src/main/res/layout/activity_main.xml" value="0.1890625" />
+        <entry key="..\:/Android App/MVVMImageSearch/app/src/main/res/layout/fragment_gallery.xml" value="0.36822916666666666" />
+        <entry key="..\:/Android App/MVVMImageSearch/app/src/main/res/layout/item_unsplash_photo.xml" value="0.36822916666666666" />
       </map>
     </option>
   </component>
