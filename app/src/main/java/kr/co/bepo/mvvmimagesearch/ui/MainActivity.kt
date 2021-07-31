@@ -1,12 +1,17 @@
 package kr.co.bepo.mvvmimagesearch.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kr.co.bepo.mvvmimagesearch.R
+import androidx.appcompat.app.AppCompatActivity
+import dagger.hilt.android.AndroidEntryPoint
+import kr.co.bepo.mvvmimagesearch.databinding.ActivityMainBinding
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
     }
 }
