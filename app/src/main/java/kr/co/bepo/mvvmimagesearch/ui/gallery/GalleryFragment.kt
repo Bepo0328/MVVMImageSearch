@@ -41,7 +41,10 @@ class GalleryFragment : Fragment() {
 
     private fun initViews() = with(binding) {
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = UnsplashPhotoLoadStateAdapter { adapter.retry() },
+            footer = UnsplashPhotoLoadStateAdapter { adapter.retry() }
+        )
     }
 
     private fun observeData() = viewModel.photos.observe(viewLifecycleOwner) {
