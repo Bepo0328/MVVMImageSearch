@@ -1,4 +1,4 @@
-package kr.co.bepo.mvvmimagesearch
+package kr.co.bepo.mvvmimagesearch.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
