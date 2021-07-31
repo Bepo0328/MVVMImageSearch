@@ -12,16 +12,25 @@ import kr.co.bepo.mvvmimagesearch.databinding.FragmentGalleryBinding
 @AndroidEntryPoint
 class GalleryFragment : Fragment() {
 
-    private lateinit var binding: FragmentGalleryBinding
     private val viewModel: GalleryViewModel by viewModels()
+
+    private var _binding: FragmentGalleryBinding? = null
+    private val binding get() = _binding!!
+
+    private val adapter = UnsplashPhotoAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View = FragmentGalleryBinding.inflate(inflater, container, false)
-        .also { binding = it }
+        .also { _binding = it }
         .root
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,11 +39,12 @@ class GalleryFragment : Fragment() {
         observeData()
     }
 
-    private fun initViews() {
-
+    private fun initViews() = with(binding) {
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter = adapter
     }
 
-    private fun observeData()  = viewModel.photos.observe(viewLifecycleOwner) {
-
+    private fun observeData() = viewModel.photos.observe(viewLifecycleOwner) {
+        adapter.submitData(viewLifecycleOwner.lifecycle, it)
     }
 }
