@@ -3,8 +3,11 @@ package kr.co.bepo.mvvmimagesearch.ui.gallery
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.bepo.mvvmimagesearch.R
 import kr.co.bepo.mvvmimagesearch.databinding.FragmentGalleryBinding
@@ -67,10 +70,33 @@ class GalleryFragment : Fragment() {
 
     private fun initViews() = with(binding) {
         recyclerView.setHasFixedSize(true)
+        recyclerView.itemAnimator = null
         recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
             header = UnsplashPhotoLoadStateAdapter { adapter.retry() },
             footer = UnsplashPhotoLoadStateAdapter { adapter.retry() }
         )
+
+        buttonRetry.setOnClickListener {
+            adapter.retry()
+        }
+
+        adapter.addLoadStateListener { loadState ->
+            progressBar.isVisible = loadState.source.refresh is LoadState.Loading
+            recyclerView.isVisible = loadState.source.refresh is LoadState.NotLoading
+            buttonRetry.isVisible = loadState.source.refresh is LoadState.Error
+            textViewError.isVisible = loadState.source.refresh is LoadState.Error
+
+            // empty view
+            if (loadState.source.refresh is LoadState.NotLoading &&
+                loadState.append.endOfPaginationReached &&
+                adapter.itemCount < 1
+            ) {
+                recyclerView.isGone = true
+                textViewEmpty.isVisible = true
+            } else {
+                textViewEmpty.isGone = true
+            }
+        }
 
         setHasOptionsMenu(true)
     }
