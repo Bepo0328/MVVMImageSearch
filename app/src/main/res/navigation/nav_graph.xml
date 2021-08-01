@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/detailsFragment"
         android:name="kr.co.bepo.mvvmimagesearch.ui.details.DetailsFragment"
-        android:label="@string/details"
+        android:label="@string/photo"
         tools:layout="@layout/fragment_details" >
 
         <argument
