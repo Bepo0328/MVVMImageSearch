@@ -7,20 +7,22 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import dagger.hilt.android.AndroidEntryPoint
 import kr.co.bepo.mvvmimagesearch.R
+import kr.co.bepo.mvvmimagesearch.data.UnsplashPhoto
 import kr.co.bepo.mvvmimagesearch.databinding.FragmentGalleryBinding
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment() {
+class GalleryFragment : Fragment(), UnsplashPhotoAdapter.OnItemClickListener {
 
     private val viewModel: GalleryViewModel by viewModels()
 
     private var _binding: FragmentGalleryBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter = UnsplashPhotoAdapter()
+    private val adapter = UnsplashPhotoAdapter(this)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +43,11 @@ class GalleryFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onItemClick(photo: UnsplashPhoto) {
+        val action = GalleryFragmentDirections.actionGalleryFragmentToDetailsFragment(photo)
+        findNavController().navigate(action)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

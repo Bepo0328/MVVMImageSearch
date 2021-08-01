@@ -9,6 +9,23 @@
         android:id="@+id/galleryFragment"
         android:name="kr.co.bepo.mvvmimagesearch.ui.gallery.GalleryFragment"
         android:label="@string/gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_gallery" >
+
+        <action
+            android:id="@+id/action_galleryFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="kr.co.bepo.mvvmimagesearch.ui.details.DetailsFragment"
+        android:label="@string/details"
+        tools:layout="@layout/fragment_details" >
+
+        <argument
+            android:name="photo"
+            app:argType="kr.co.bepo.mvvmimagesearch.data.UnsplashPhoto" />
+
+    </fragment>
 
 </navigation>
